@@ -7,7 +7,6 @@ module SpreeReviews
     config.autoload_paths += %W(#{config.root}/lib)
 
     initializer 'spree.reviews.environment', before: :load_config_initializers do
-      Spree::Reviews::Config = Spree::ReviewSetting.new
     end
 
     def self.activate
