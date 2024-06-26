@@ -1,8 +1,8 @@
 <% content_for :page_title do %>
-	<%= Spree.t(:editing_review_for_html, link: link_to(@review.product.name, product_path(@review.product))) %>
+	<%= Spree.t(:editing_review_for_html, link: link_to(@review.product.name, spree.product_path(@review.product))) %>
 <% end %>
 
-<%= form_for [:admin, @review] do |f| %>
+<%= form_for [:admin, @review], url: spree.admin_review_path do |f| %>
 	<div class="row">
 		<div class="col-md-6">
 			<%= render 'form', f: f %>

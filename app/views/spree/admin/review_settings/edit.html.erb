@@ -2,7 +2,7 @@
 <%= Spree.t(:review_settings, scope: :spree_reviews) %>
 <% end %>
 
-<%= form_tag admin_review_settings_path, method: :put do %>
+<%= form_tag spree.admin_review_settings_path, method: :put do %>
 	<div class="row">
 		<div class="col-md-12" data-hook="reviews">
 			<div class="checkbox">
