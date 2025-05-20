@@ -7,12 +7,8 @@ class Spree::Review < ActiveRecord::Base
   after_destroy :recalculate_product_rating
 
   validates :name, :review, presence: true
-  validates :rating, numericality: {
-    only_integer: true,
-    greater_than_or_equal_to: 1,
-    less_than_or_equal_to: 5,
-    message: Spree.t(:you_must_enter_value_for_rating)
-  }
+
+  validate :rating_within_bounds
 
   default_scope { order('spree_reviews.created_at DESC') }
 
@@ -31,5 +27,11 @@ class Spree::Review < ActiveRecord::Base
 
   def recalculate_product_rating
     product.recalculate_rating if product.present?
+  end
+
+  def rating_within_bounds
+    return if rating.is_a?(Integer) && rating.between?(1, 5)
+
+    errors.add(:rating, Spree.t('you_must_enter_value_for_rating'))
   end
 end
